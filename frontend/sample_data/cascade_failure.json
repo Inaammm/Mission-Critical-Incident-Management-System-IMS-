@@ -1,0 +1,41 @@
+{
+  "description": "Simulates a cascading failure: RDBMS outage followed by MCP Host failure and Cache degradation",
+  "scenarios": [
+    {
+      "name": "RDBMS Primary Outage",
+      "component_id": "RDBMS_PRIMARY",
+      "component_type": "RDBMS",
+      "signal_count": 150,
+      "error_message": "Connection refused: max_connections exceeded",
+      "error_code": "CONN_REFUSED_5432",
+      "latency_ms": 60000
+    },
+    {
+      "name": "MCP Host Cascade Failure",
+      "component_id": "MCP_HOST_01",
+      "component_type": "API",
+      "signal_count": 200,
+      "error_message": "Upstream dependency RDBMS_PRIMARY unavailable - circuit open",
+      "error_code": "MCP_UPSTREAM_503",
+      "latency_ms": 30000
+    },
+    {
+      "name": "Cache Cluster Degradation",
+      "component_id": "CACHE_CLUSTER_01",
+      "component_type": "CACHE",
+      "signal_count": 100,
+      "error_message": "Eviction rate exceeded threshold - memory pressure from failed DB queries",
+      "error_code": "CACHE_EVICT_OOM",
+      "latency_ms": 5000
+    },
+    {
+      "name": "Async Queue Backlog",
+      "component_id": "QUEUE_BROKER_01",
+      "component_type": "QUEUE",
+      "signal_count": 120,
+      "error_message": "Consumer lag exceeding 10000 messages - downstream DB writes failing",
+      "error_code": "QUEUE_LAG_CRITICAL",
+      "latency_ms": 45000
+    }
+  ]
+}
