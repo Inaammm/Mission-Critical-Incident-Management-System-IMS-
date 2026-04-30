@@ -1,0 +1,48 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "IMS - Incident Management System",
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Signals Ingested (Total)",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 },
+        "targets": [{ "expr": "ims_signals_ingested_total", "refId": "A" }]
+      },
+      {
+        "title": "Signals Per Second",
+        "type": "gauge",
+        "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 },
+        "targets": [{ "expr": "ims_signals_per_second", "refId": "A" }],
+        "fieldConfig": { "defaults": { "max": 10000, "thresholds": { "steps": [{"color":"green","value":0},{"color":"yellow","value":5000},{"color":"red","value":8000}] } } }
+      },
+      {
+        "title": "Work Items Created",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 6, "x": 12, "y": 0 },
+        "targets": [{ "expr": "ims_work_items_created_total", "refId": "A" }]
+      },
+      {
+        "title": "MTTR Distribution",
+        "type": "histogram",
+        "gridPos": { "h": 6, "w": 12, "x": 0, "y": 4 },
+        "targets": [{ "expr": "ims_mttr_seconds_bucket", "refId": "A" }]
+      },
+      {
+        "title": "Signals Ingestion Rate",
+        "type": "timeseries",
+        "gridPos": { "h": 6, "w": 12, "x": 12, "y": 4 },
+        "targets": [{ "expr": "rate(ims_signals_ingested_total[1m])", "refId": "A" }]
+      },
+      {
+        "title": "State Transitions",
+        "type": "timeseries",
+        "gridPos": { "h": 6, "w": 24, "x": 0, "y": 10 },
+        "targets": [{ "expr": "rate(ims_state_transitions_total[5m])", "legendFormat": "{{from_state}} -> {{to_state}}", "refId": "A" }]
+      }
+    ],
+    "schemaVersion": 30,
+    "version": 1
+  }
+}
