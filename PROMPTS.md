@@ -2,7 +2,7 @@
 
 ## Initial Specification
 
-The project was built from the "Engineering Challenge: Mission-Critical Incident Management System (IMS)" specification document, which required:
+The project was built from the "Engineering Challenge: Mission-Critical Incident Management System (IMS)" which required:
 
 1. A resilient IMS to monitor a distributed stack (APIs, MCP Hosts, Distributed Caches, Async Queues, RDBMS, NoSQL stores)
 2. High-volume signal ingestion (10k signals/sec) with debouncing
